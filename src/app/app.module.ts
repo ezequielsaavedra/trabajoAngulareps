@@ -8,6 +8,9 @@ import { TableCursosComponent } from './components/table-cursos/table-cursos.com
 import { TableAlumnosComponent } from './components/table-alumnos/table-alumnos.component';
 import { MainComponent } from './components/main/main.component';
 import { EditAlumnosFormComponent } from './components/edit-alumnos-form/edit-alumnos-form.component';
+import { NombreAlumnosPipe } from './pipes/nombre-alumnos.pipe';
+import { BooleanTextPipe } from './pipes/boolean-text.pipe';
+import { TitulosDirective } from './directives/titulos.directive';
 
 @NgModule({
   declarations: [
@@ -15,7 +18,10 @@ import { EditAlumnosFormComponent } from './components/edit-alumnos-form/edit-al
     TableCursosComponent,
     TableAlumnosComponent,
     MainComponent,
-    EditAlumnosFormComponent
+    EditAlumnosFormComponent,
+    NombreAlumnosPipe,
+    BooleanTextPipe,
+    TitulosDirective
   ],
   imports: [
     BrowserModule,

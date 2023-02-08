@@ -20,6 +20,6 @@
     </form>
 </div>
 <div mat-dialog-actions>
-    <button mat-raised-button color="primary">Cerrar</button>
-    <button mat-raised-button color="accent">Editar</button>
+    <button mat-raised-button color="accent" [disabled]="formAlumnos.invalid" [mat-dialog-close]="true">Editar</button>
+    <button mat-raised-button color="primary" mat-dialog-close>Cerrar</button>
 </div>

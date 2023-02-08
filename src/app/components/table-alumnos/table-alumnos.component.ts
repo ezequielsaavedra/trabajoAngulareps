@@ -17,7 +17,7 @@ export class TableAlumnosComponent {
     { nombre: "Julian", apellido: "Corbera", email: "jcorbera@gmail.com", estado: false }
   ];
   dataSource: MatTableDataSource<alumno> = new MatTableDataSource<alumno>(this.alumnos);
-  columnas: string[] = ["nombre", "apellido", "email", "estado", "acciones"];
+  columnas: string[] = ["nombre", "email", "estado", "acciones"];
 
   constructor(
     private dialog: MatDialog
@@ -28,7 +28,7 @@ export class TableAlumnosComponent {
   abrirDialog(alumno: alumno) {
     const dialogRef = this.dialog.open(EditAlumnosFormComponent, {
       height: '500px',
-      width: '500px',
+      width: '400px',
       data: alumno
     });    
   }
