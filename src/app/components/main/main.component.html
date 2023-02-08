@@ -1,0 +1,25 @@
+<mat-toolbar class="example-sidenav-content" color="primary">
+    <div class="example-sidenav-content">
+        <button type="button" mat-button (click)="drawer.toggle()" aria-label="Example icon-button with menu icon">
+            <mat-icon>menu</mat-icon>
+        </button>
+    </div>
+    <span>Comunidad de idiomas</span>
+    <span class="example-spacer"></span>
+    <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
+        <mat-icon>login</mat-icon>
+    </button>
+    <p>Iniciar sesion</p>
+</mat-toolbar>
+<mat-drawer-container class="example-container" autosize>
+    <mat-drawer #drawer class="example-sidenav" mode="side" opened="true">
+        <br>
+        <div>Alumnos</div>
+        <br>
+        <div>Cursos</div>
+        <br>
+        <div>Inscripciones</div>
+    </mat-drawer>
+    <br>
+    <app-table-alumnos></app-table-alumnos>
+</mat-drawer-container>

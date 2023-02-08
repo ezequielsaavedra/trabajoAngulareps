@@ -1,0 +1,25 @@
+<div mat-dialog-title>Editar Alumnos</div>
+<div mat-dialog-content>
+    <form [formGroup]="formAlumnos">
+        <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Nombre</label>
+            <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" formControlName="nombre">
+        </div>
+        <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label">Apellido</label>
+            <input type="text" class="form-control" id="exampleInputPassword1" formControlName="apellido">
+        </div>
+        <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label">Email</label>
+            <input type="mail" class="form-control" id="exampleInputPassword1" formControlName="email">
+        </div>
+        <div class="mb-3 form-check">
+            <input type="checkbox" class="form-check-input" id="exampleCheck1" formControlName="estado">
+            <label class="form-check-label" for="exampleCheck1" >Estado</label>
+        </div>
+    </form>
+</div>
+<div mat-dialog-actions>
+    <button mat-raised-button color="primary">Cerrar</button>
+    <button mat-raised-button color="accent">Editar</button>
+</div>
