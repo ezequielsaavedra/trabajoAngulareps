@@ -1,6 +1,6 @@
-import { Component, Inject } from '@angular/core';
+import { Component, EventEmitter, Inject, Output } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { FormControl, FormGroup, FormGroupDirective, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { alumno } from 'src/app/models/alumno';
 
 @Component({
@@ -11,6 +11,13 @@ import { alumno } from 'src/app/models/alumno';
 export class EditAlumnosFormComponent {
 
   formAlumnos: FormGroup;
+
+  @Output() eventoEditarAlumno: EventEmitter<alumno> = new EventEmitter<alumno>();
+
+  editarAlumno() {
+    console.log(this.formAlumnos.value)
+    this.eventoEditarAlumno.emit(this.formAlumnos.value)
+  }
 
   constructor(
     private dialogRef: MatDialogRef<EditAlumnosFormComponent>,
@@ -24,6 +31,5 @@ export class EditAlumnosFormComponent {
         estado: new FormControl(data.estado)
       }
     )
-
   }
 }

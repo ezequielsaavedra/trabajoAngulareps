@@ -1,6 +1,7 @@
-<div mat-dialog-title>Editar Alumnos</div>
+<mat-card class="agregar-alumnos" align="start">
+<div mat-dialog-title>Agregar Alumnos</div>
 <div mat-dialog-content>
-    <form [formGroup]="formAlumnos">
+    <form [formGroup]="formAgregarAlumnos">
         <div class="mb-3">
             <label for="inputNombre" class="form-label">Nombre</label>
             <input type="text" class="form-control" id="inputNombre" aria-describedby="emailHelp" formControlName="nombre">
@@ -20,6 +21,6 @@
     </form>
 </div>
 <div mat-dialog-actions>
-    <button mat-raised-button color="accent" [disabled]="formAlumnos.invalid" [mat-dialog-close]="true" (click)="editarAlumno()">Editar</button>
-    <button mat-raised-button color="primary" mat-dialog-close>Cerrar</button>
+    <button type="submit" mat-raised-button color="accent" [disabled]="formAgregarAlumnos.invalid"  (click)="agregarAlumno()">Agregar</button>
 </div>
+</mat-card>

@@ -21,5 +21,14 @@
         <div>Inscripciones</div>
     </mat-drawer>
     <br>
-    <app-table-alumnos></app-table-alumnos>
+    <div align="center">
+        <app-form-agregar-alumnos (eventoAgregarAlumno)="agregarAlumno($event)"></app-form-agregar-alumnos>
+    </div>
+    <br>
+    <div>
+        <app-table-alumnos [alumnosTable]="alumnos"></app-table-alumnos>
+    </div>
+
+
+
 </mat-drawer-container>

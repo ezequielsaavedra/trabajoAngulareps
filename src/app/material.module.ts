@@ -7,6 +7,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatTableModule } from '@angular/material/table';
 import { MatDialogModule } from '@angular/material/dialog';
+import {MatCardModule} from '@angular/material/card';
 
 @NgModule({
   declarations: [],
@@ -18,7 +19,8 @@ import { MatDialogModule } from '@angular/material/dialog';
     MatSidenavModule,
     MatCheckboxModule,
     MatTableModule,
-    MatDialogModule
+    MatDialogModule,
+    MatCardModule
   ], 
   exports: [
     CommonModule,
@@ -28,7 +30,8 @@ import { MatDialogModule } from '@angular/material/dialog';
     MatSidenavModule,
     MatCheckboxModule,
     MatTableModule,
-    MatDialogModule
+    MatDialogModule,
+    MatCardModule
   ]
 })
 export class MaterialModule { }

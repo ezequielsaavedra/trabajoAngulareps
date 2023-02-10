@@ -11,6 +11,7 @@ import { EditAlumnosFormComponent } from './components/edit-alumnos-form/edit-al
 import { NombreAlumnosPipe } from './pipes/nombre-alumnos.pipe';
 import { BooleanTextPipe } from './pipes/boolean-text.pipe';
 import { TitulosDirective } from './directives/titulos.directive';
+import { FormAgregarAlumnosComponent } from './components/form-agregar-alumnos/form-agregar-alumnos.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { TitulosDirective } from './directives/titulos.directive';
     EditAlumnosFormComponent,
     NombreAlumnosPipe,
     BooleanTextPipe,
-    TitulosDirective
+    TitulosDirective,
+    FormAgregarAlumnosComponent
   ],
   imports: [
     BrowserModule,
