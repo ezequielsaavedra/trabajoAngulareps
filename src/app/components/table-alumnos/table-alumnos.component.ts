@@ -12,7 +12,7 @@ import { EditAlumnosFormComponent } from '../edit-alumnos-form/edit-alumnos-form
 export class TableAlumnosComponent {
   @Input() alumnosTable!: alumno[]
   dataSource!: MatTableDataSource<alumno>
-  columnas: string[] = [ "id","nombre", "email", "estado", "acciones"];
+  columnas: string[] = ["id", "nombre", "email", "estado", "acciones"];
   @ViewChild(MatTable) table!: MatTable<any>;
   @Output() eventoEditarAlumno: EventEmitter<alumno> = new EventEmitter<alumno>();
 
@@ -38,13 +38,15 @@ export class TableAlumnosComponent {
   }
 
   abrirDialog(alumno: alumno): void {
-    const dialogRef = this.dialog.open(EditAlumnosFormComponent , {
+    const dialogRef = this.dialog.open(EditAlumnosFormComponent, {
       height: '500px',
       width: '400px',
       data: alumno
     });
-    dialogRef.afterClosed().subscribe( response => {
-      this.eventoEditarAlumno.emit(response.data)
+    dialogRef.afterClosed().subscribe(response => {
+      if (response) {
+        this.eventoEditarAlumno.emit(response.data)
+      }
     })
   }
 
