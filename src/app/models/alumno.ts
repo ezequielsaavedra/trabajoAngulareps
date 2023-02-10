@@ -3,4 +3,5 @@ export interface alumno {
     apellido: string;
     email: string;
     estado: boolean;
+    id: number;
 }

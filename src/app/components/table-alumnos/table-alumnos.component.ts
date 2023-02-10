@@ -1,4 +1,4 @@
-import { Component, Input, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 import { alumno } from "src/app/models/alumno";
 import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
@@ -12,11 +12,11 @@ import { EditAlumnosFormComponent } from '../edit-alumnos-form/edit-alumnos-form
 export class TableAlumnosComponent {
   @Input() alumnosTable!: alumno[]
   dataSource!: MatTableDataSource<alumno>
-  columnas: string[] = ["nombre", "email", "estado", "acciones"];
+  columnas: string[] = [ "id","nombre", "email", "estado", "acciones"];
   @ViewChild(MatTable) table!: MatTable<any>;
+  @Output() eventoEditarAlumno: EventEmitter<alumno> = new EventEmitter<alumno>();
 
   ngOnChanges() {
-    console.log(this.alumnosTable)
     this.dataSource = new MatTableDataSource<alumno>(this.alumnosTable);
   }
 
@@ -43,5 +43,9 @@ export class TableAlumnosComponent {
       width: '400px',
       data: alumno
     });
+    dialogRef.afterClosed().subscribe( response => {
+      this.eventoEditarAlumno.emit(response.data)
+    })
   }
+
 }

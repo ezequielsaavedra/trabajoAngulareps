@@ -3,8 +3,12 @@
 <div mat-dialog-content>
     <form [formGroup]="formAgregarAlumnos">
         <div class="mb-3">
+            <label for="inputID" class="form-label">ID</label>
+            <input type="number" class="form-control" id="inputID"  formControlName="id">
+        </div>
+        <div class="mb-3">
             <label for="inputNombre" class="form-label">Nombre</label>
-            <input type="text" class="form-control" id="inputNombre" aria-describedby="emailHelp" formControlName="nombre">
+            <input type="text" class="form-control" id="inputNombre"  formControlName="nombre">
         </div>
         <div class="mb-3">
             <label for="inputApelido" class="form-label">Apellido</label>

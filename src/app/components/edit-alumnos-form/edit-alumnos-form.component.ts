@@ -14,10 +14,7 @@ export class EditAlumnosFormComponent {
 
   @Output() eventoEditarAlumno: EventEmitter<alumno> = new EventEmitter<alumno>();
 
-  editarAlumno() {
-    console.log(this.formAlumnos.value)
-    this.eventoEditarAlumno.emit(this.formAlumnos.value)
-  }
+
 
   constructor(
     private dialogRef: MatDialogRef<EditAlumnosFormComponent>,
@@ -25,6 +22,7 @@ export class EditAlumnosFormComponent {
   ) {
     this.formAlumnos = new FormGroup(
       {
+        id: new FormControl(data.id),
         nombre: new FormControl(data.nombre, [Validators.required]),
         apellido: new FormControl(data.apellido, [Validators.required]),
         email: new FormControl(data.email, [Validators.required, Validators.email]),
@@ -32,4 +30,9 @@ export class EditAlumnosFormComponent {
       }
     )
   }
+
+  editarAlumno() {
+    this.dialogRef.close({data:this.formAlumnos.value})
+  }
+
 }

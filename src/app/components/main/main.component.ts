@@ -8,19 +8,25 @@ import { alumno } from 'src/app/models/alumno';
 })
 export class MainComponent {
   alumnos: alumno[] = [
-    { nombre: "Agustin", apellido: "Toponi", email: "atoponi@gmail.com", estado: true },
-    { nombre: "Nicolas", apellido: "Lopez", email: "nlopez@gmail.com", estado: true },
-    { nombre: "Andres", apellido: "Orellana", email: "aorellana@gmail.com", estado: false },
-    { nombre: "Julian", apellido: "Corbera", email: "jcorbera@gmail.com", estado: false }
+    { nombre: "Agustin", apellido: "Toponi", email: "atoponi@gmail.com", estado: true, id: 1 },
+    { nombre: "Nicolas", apellido: "Lopez", email: "nlopez@gmail.com", estado: true, id: 2 },
+    { nombre: "Andres", apellido: "Orellana", email: "aorellana@gmail.com", estado: false, id: 3 },
+    { nombre: "Julian", apellido: "Corbera", email: "jcorbera@gmail.com", estado: false, id: 4 }
   ];
 
   agregarAlumno(alumno: alumno){
-    console.log(alumno)
     this.alumnos.push(alumno)
-    console.log(this.alumnos)
   }
 
-  editarAlumno(alumnos: alumno){
-    console.log(alumnos)
+  editarAlumno(alum: alumno){
+    this.alumnos = this.alumnos.filter((value) => {
+      if(value.id === alum.id){
+        value.nombre = alum.nombre
+        value.apellido = alum.apellido
+        value.email = alum.email
+        value.estado = alum.estado
+      }
+      return true
+    })
   }
 }

@@ -20,6 +20,7 @@ export class FormAgregarAlumnosComponent {
   constructor() {
     this.formAgregarAlumnos = new FormGroup(
       {
+        id: new FormControl("", [Validators.required]),
         nombre: new FormControl("", [Validators.required]),
         apellido: new FormControl("", [Validators.required]),
         email: new FormControl("", [Validators.required, Validators.email]),
