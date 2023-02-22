@@ -52,7 +52,6 @@ export class AlumnosService {
         return alumnos.filter((alumnos: alumno) => alumnos.nombre.includes(form.toLocaleLowerCase()) || alumnos.apellido.includes(form.toLocaleLowerCase())) 
       })
     ).subscribe((alumnos) => {
-      console.log(alumnos)
       this.alumnosFiltro = alumnos
       return this.alumnos$.next(this.alumnosFiltro)
     })

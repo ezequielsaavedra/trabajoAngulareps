@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, map, Observable, of } from 'rxjs';
 import { curso } from 'src/app/models/curso';
 
 @Injectable()
@@ -51,14 +51,45 @@ export class CursosService {
     },
   ];
   private cursos$!: BehaviorSubject<curso[]>;
-  private cursosFirltro!: BehaviorSubject<curso[]>;
+  private cursosFiltro!: curso[];
 
   constructor() {
-
   }
 
   obtenerCursos(): Observable<curso[]> {
     this.cursos$ = new BehaviorSubject<curso[]>(this.cursos)
     return this.cursos$.asObservable();
+  }
+
+  agregarCurso(curso: curso) {
+    this.cursos.push(curso);
+    this.cursos$.next(this.cursos);
+  }
+
+  eliminarCursos(curso: curso){
+    let indice = this.cursos.findIndex((c: curso) => c.comision === curso.comision)
+    if (indice > -1) {
+      this.cursos.splice(indice, 1);
+      this.cursos$.next(this.cursos);
+    }
+  }
+
+  editarCurso(curso: curso) {
+    let indice = this.cursos.findIndex((c: curso) => c.comision === curso.comision)
+    if (indice > -1) {
+      this.cursos[indice] = curso;
+      this.cursos$.next(this.cursos);
+    }
+  }
+
+  filtrarCurso(form: number): any {
+    of(this.cursos).pipe(
+      map((cursos : curso[]) => {
+        return cursos.filter((cursos: curso) => cursos.comision == form)
+      })
+    ).subscribe((cursos) => {
+      this.cursosFiltro = cursos
+      return this.cursos$.next(this.cursosFiltro)
+    })
   }
 }

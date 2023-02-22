@@ -8,6 +8,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { CursosModule } from './cursos/cursos.module';
 import { AlumnosModule } from './alumnos/alumnos.module';
 
+
 @NgModule({
   declarations: [
     AppComponent,

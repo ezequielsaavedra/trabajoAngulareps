@@ -8,7 +8,12 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatTableModule } from '@angular/material/table';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatCardModule } from '@angular/material/card';
-import {MatTooltipModule} from '@angular/material/tooltip';
+import { MatTooltipModule} from '@angular/material/tooltip';
+import { MatDatepickerModule} from '@angular/material/datepicker';
+import { MatFormFieldModule} from '@angular/material/form-field';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatInputModule } from '@angular/material/input';
 
 @NgModule({
   declarations: [],
@@ -22,7 +27,12 @@ import {MatTooltipModule} from '@angular/material/tooltip';
     MatTableModule,
     MatDialogModule,
     MatCardModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatDatepickerModule,
+    MatFormFieldModule,
+    MatSlideToggleModule,
+    MatNativeDateModule,
+    MatInputModule
   ], 
   exports: [
     CommonModule,
@@ -34,7 +44,12 @@ import {MatTooltipModule} from '@angular/material/tooltip';
     MatTableModule,
     MatDialogModule,
     MatCardModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatDatepickerModule,
+    MatFormFieldModule,
+    MatSlideToggleModule,
+    MatNativeDateModule,
+    MatInputModule
   ]
 })
 export class MaterialModule { }
