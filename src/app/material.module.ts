@@ -7,7 +7,8 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatTableModule } from '@angular/material/table';
 import { MatDialogModule } from '@angular/material/dialog';
-import {MatCardModule} from '@angular/material/card';
+import { MatCardModule } from '@angular/material/card';
+import {MatTooltipModule} from '@angular/material/tooltip';
 
 @NgModule({
   declarations: [],
@@ -20,7 +21,8 @@ import {MatCardModule} from '@angular/material/card';
     MatCheckboxModule,
     MatTableModule,
     MatDialogModule,
-    MatCardModule
+    MatCardModule,
+    MatTooltipModule
   ], 
   exports: [
     CommonModule,
@@ -31,7 +33,8 @@ import {MatCardModule} from '@angular/material/card';
     MatCheckboxModule,
     MatTableModule,
     MatDialogModule,
-    MatCardModule
+    MatCardModule,
+    MatTooltipModule
   ]
 })
 export class MaterialModule { }

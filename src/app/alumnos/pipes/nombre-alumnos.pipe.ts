@@ -6,7 +6,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class NombreAlumnosPipe implements PipeTransform {
 
   transform(value: string, ...args: string[]): string {
-    return `${args[0]} ${args[1]}`;
+    return `${args[0]} ${args[1]}`.toLocaleUpperCase();
   }
 
 }

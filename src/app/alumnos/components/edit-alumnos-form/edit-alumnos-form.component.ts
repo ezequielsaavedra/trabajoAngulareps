@@ -2,6 +2,7 @@ import { Component, EventEmitter, Inject, Output } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { alumno } from 'src/app/models/alumno';
+import { AlumnosService } from '../../services/alumnos.service';
 
 @Component({
   selector: 'app-edit-alumnos-form',
@@ -9,7 +10,6 @@ import { alumno } from 'src/app/models/alumno';
   styleUrls: ['./edit-alumnos-form.component.css']
 })
 export class EditAlumnosFormComponent {
-
   formAlumnos: FormGroup;
 
   @Output() eventoEditarAlumno: EventEmitter<alumno> = new EventEmitter<alumno>();
@@ -17,6 +17,7 @@ export class EditAlumnosFormComponent {
 
 
   constructor(
+    private alumnosService: AlumnosService,
     private dialogRef: MatDialogRef<EditAlumnosFormComponent>,
     @Inject(MAT_DIALOG_DATA) public data: alumno
   ) {
@@ -32,7 +33,15 @@ export class EditAlumnosFormComponent {
   }
 
   editarAlumno() {
-    this.dialogRef.close({data:this.formAlumnos.value})
+    let alumno: alumno = {
+      id: this.formAlumnos.value.id,
+      nombre: this.formAlumnos.value.nombre.toLocaleLowerCase(),
+      apellido: this.formAlumnos.value.apellido.toLocaleLowerCase(),
+      email: this.formAlumnos.value.email,
+      estado: this.formAlumnos.value.estado
+    }
+    this.dialogRef.close()
+    this.alumnosService.editarAlumno(alumno)
   }
 
 }
