@@ -7,12 +7,14 @@ import { TitulosDirective } from './directives/titulos.directive';
 import { AppRoutingModule } from './app-routing.module';
 import { CursosModule } from './cursos/cursos.module';
 import { AlumnosModule } from './alumnos/alumnos.module';
+import { HomeComponent } from './components/home/home.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    TitulosDirective
+    TitulosDirective,
+    HomeComponent
   ],
   imports: [
     BrowserModule,

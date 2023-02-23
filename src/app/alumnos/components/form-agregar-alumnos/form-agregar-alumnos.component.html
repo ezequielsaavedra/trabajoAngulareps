@@ -1,16 +1,16 @@
 <mat-card class="agregar-alumnos" align="start">
 <div mat-dialog-title>Agregar Alumnos</div>
 <div mat-dialog-content>
-    <form [formGroup]="formAgregarAlumnos">
-        <div class="mb-3">
+    <form [formGroup]="formAgregarAlumnos" class="row">
+        <div class="mb-3 col-12">
             <label for="inputNombre" class="form-label">Nombre</label>
             <input type="text" class="form-control" id="inputNombre"  formControlName="nombre">
         </div>
-        <div class="mb-3">
+        <div class="mb-3 col-12">
             <label for="inputApelido" class="form-label">Apellido</label>
             <input type="text" class="form-control" id="inputApelido" formControlName="apellido">
         </div>
-        <div class="mb-3">
+        <div class="mb-3 col-12">
             <label for="inputEmail" class="form-label">Email</label>
             <input type="mail" class="form-control" id="inputEmail" formControlName="email">
         </div>
