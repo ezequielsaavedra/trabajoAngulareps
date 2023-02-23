@@ -1,1 +1,40 @@
-<p>agregar-cursos-form works!</p>
+<mat-card class="agregar-curso" align="start">
+    <div mat-dialog-title>Agregar Alumnos</div>
+    <div mat-dialog-content>
+        <form [formGroup]="formAgregarCurso" class="row">
+            <div class="mb-3" class="col-6">
+                <label for="inputNombre" class="form-label">Nombre</label>
+                <input type="text" class="form-control" id="inputNombre" aria-describedby="nombre" formControlName="nombre">
+            </div>
+            <div class="mb-3" class="col-6">
+                <label for="inputApelido" class="form-label">Apellido</label>
+                <input type="text" class="form-control" id="inputApelido" formControlName="apellido">
+            </div>
+            <div class="mb-3" class="col-12">
+                <label for="inputEmail" class="form-label">Email</label>
+                <input type="mail" class="form-control" id="inputEmail" formControlName="email">
+            </div>
+            <mat-form-field appearance="fill" class="col-6 mt-3">
+                <mat-label for="inputFechaInicio">Choose a date</mat-label>
+                <input matInput [matDatepicker]="fechaInicio" id="inputFechaInicio" formControlName="fechaInicio">
+                <mat-hint>DD/MM/AAAA</mat-hint>
+                <mat-datepicker-toggle matIconSuffix [for]="fechaInicio"></mat-datepicker-toggle>
+                <mat-datepicker #fechaInicio></mat-datepicker>
+            </mat-form-field>
+            <mat-form-field appearance="fill" class="col-6 mt-3">
+                <mat-label for="inputFechaFin">Choose a date</mat-label>
+                <input matInput [matDatepicker]="fechaFin" id="inputFechaFin" formControlName="fechaFin">
+                <mat-hint>DD/MM/AAAA</mat-hint>
+                <mat-datepicker-toggle matIconSuffix [for]="fechaFin"></mat-datepicker-toggle>
+                <mat-datepicker #fechaFin></mat-datepicker>
+            </mat-form-field>
+            <div class="mt-3 form-check">
+                <input type="checkbox" class="form-check-input" id="checkboxEstado" formControlName="estadoInscipcion">
+                <label class="form-check-label" for="checkboxEstado">Estado</label>
+            </div>
+        </form>
+    </div>
+    <div mat-dialog-actions>
+        <button type="submit" mat-raised-button color="accent" [disabled]="formAgregarCurso.invalid"  (click)="agregarCurso()">Agregar</button>
+    </div>
+    </mat-card>

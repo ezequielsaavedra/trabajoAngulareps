@@ -22,7 +22,7 @@ export class CursosService {
         apellido: "rebo",
         email: "mrebo@gmail.com",
       },
-      comision: 2345,
+      comision: 5479,
       estadoInscripcion: false,
       fechaInicio: new Date(2023, 2, 7),
       fechaFin: new Date(2023, 10, 23)
@@ -33,7 +33,7 @@ export class CursosService {
         apellido: "tachi",
         email: "stachi@gmail.com",
       },
-      comision: 2345,
+      comision: 6584,
       estadoInscripcion: false,
       fechaInicio: new Date(2023, 2, 6),
       fechaFin: new Date(2023, 10, 22)
@@ -44,7 +44,7 @@ export class CursosService {
         apellido: "quadinaros",
         email: "bquadinaros@gmail.com",
       },
-      comision: 2345,
+      comision: 3176,
       estadoInscripcion: true,
       fechaInicio: new Date(2023, 2, 7),
       fechaFin: new Date(2023, 10, 23)
@@ -66,7 +66,16 @@ export class CursosService {
     this.cursos$.next(this.cursos);
   }
 
-  eliminarCursos(curso: curso){
+  numeroComision(): number {
+    let numero = Math.floor(Math.random() * (10000 - 999) + 999)
+    if(numero  != this.cursos.findIndex((c: curso) => c.comision === numero)){
+      return numero
+    } else {
+      return this.numeroComision()
+    }
+  }
+
+  eliminarCursos(curso: curso) {
     let indice = this.cursos.findIndex((c: curso) => c.comision === curso.comision)
     if (indice > -1) {
       this.cursos.splice(indice, 1);
@@ -82,10 +91,10 @@ export class CursosService {
     }
   }
 
-  filtrarCurso(form: number): any {
+  filtrarCurso(form: string): any {
     of(this.cursos).pipe(
-      map((cursos : curso[]) => {
-        return cursos.filter((cursos: curso) => cursos.comision == form)
+      map((cursos: curso[]) => {
+        return cursos.filter((cursos: curso) => cursos.comision.toString().includes(form))
       })
     ).subscribe((cursos) => {
       this.cursosFiltro = cursos

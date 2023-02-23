@@ -3,7 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { alumno } from 'src/app/models/alumno';
 import { AlumnosService } from '../../services/alumnos.service';
-import { EditAlumnosFormComponent } from '../edit-alumnos-form/edit-alumnos-form.component';
+
 
 @Component({
   selector: 'app-form-agregar-alumnos',
@@ -16,7 +16,7 @@ export class FormAgregarAlumnosComponent {
 
   constructor(
     private alumnosService: AlumnosService,
-    private dialogRef: MatDialogRef<EditAlumnosFormComponent>,
+    private dialogRef: MatDialogRef<FormAgregarAlumnosComponent>
   ) {
     this.formAgregarAlumnos = new FormGroup(
       {
@@ -36,9 +36,9 @@ export class FormAgregarAlumnosComponent {
       apellido: this.formAgregarAlumnos.value.apellido.toLocaleLowerCase(),
       email: this.formAgregarAlumnos.value.email,
       estado: this.formAgregarAlumnos.value.estado
-    }
-    this.dialogRef.close()
-    this.alumnosService.agregarAlumno(alumno)
+    };
+    this.dialogRef.close();
+    this.alumnosService.agregarAlumno(alumno);
     }
 
 }

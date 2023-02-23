@@ -20,7 +20,7 @@ export class TableCursosComponent {
   columnas: string[] = ["comision", "profesor", "fecha de inicio", "fecha de finalizacion", "inscripcion", "acciones"]
   formFilter!: FormGroup;
   controles: any = {
-    comision: new FormControl()
+    comision: new FormControl("")
   }
   constructor(
     private cursosService: CursosService,
@@ -54,7 +54,7 @@ export class TableCursosComponent {
 
   abrirAgregar(): void {
     const dialogRef = this.dialog.open(AgregarCursosFormComponent, {
-      height: '500px',
+      height: '450px',
       width: '400px'
     })
   }
