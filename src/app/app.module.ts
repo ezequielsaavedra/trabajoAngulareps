@@ -7,14 +7,12 @@ import { TitulosDirective } from './directives/titulos.directive';
 import { AppRoutingModule } from './app-routing.module';
 import { CursosModule } from './cursos/cursos.module';
 import { AlumnosModule } from './alumnos/alumnos.module';
-import { HomeComponent } from './components/home/home.component';
-
+import { HomeModule } from './home/home.module';
 
 @NgModule({
   declarations: [
     AppComponent,
-    TitulosDirective,
-    HomeComponent
+    TitulosDirective
   ],
   imports: [
     BrowserModule,
@@ -22,7 +20,8 @@ import { HomeComponent } from './components/home/home.component';
     MaterialModule,
     CursosModule,
     AppRoutingModule,
-    AlumnosModule
+    AlumnosModule,
+    HomeModule
   ],
   providers: [],
   bootstrap: [AppComponent]
