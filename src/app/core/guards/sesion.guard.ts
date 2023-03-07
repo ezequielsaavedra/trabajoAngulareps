@@ -11,16 +11,16 @@ export class SesionGuard implements CanActivate, CanActivateChild, CanLoad {
   constructor(
     private sesion: SesionService,
     private router: Router
-  ){}
-  
+  ) { }
+
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     return this.sesion.obtenerSesion().pipe(
       map((sesion: Sesion) => {
-        if(sesion.sesionActiva){
+        if (sesion.sesionActiva) {
           return true;
-        }else{
+        } else {
           this.router.navigate(['login/iniciar-sesion']);
           return false;
         }
@@ -31,30 +31,30 @@ export class SesionGuard implements CanActivate, CanActivateChild, CanLoad {
   canActivateChild(
     childRoute: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-      return this.sesion.obtenerSesion().pipe(
-        map((sesion: Sesion) => {
-          if(sesion.sesionActiva){
-            return true;
-          }else{
-            this.router.navigate(['login/iniciar-sesion']);
-            return false;
-          }
-        })
-      );
-    }
+    return this.sesion.obtenerSesion().pipe(
+      map((sesion: Sesion) => {
+        if (sesion.sesionActiva) {
+          return true;
+        } else {
+          this.router.navigate(['login/iniciar-sesion']);
+          return false;
+        }
+      })
+    );
+  }
 
-    canLoad(
-      route: Route,
-      segments: UrlSegment[]): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-        return this.sesion.obtenerSesion().pipe(
-          map((sesion: Sesion) => {
-            if(sesion.sesionActiva){
-              return true;
-            }else{
-              this.router.navigate(['auth/login']);
-              return false;
-            }
-          })
-        );
-    }
+  canLoad(
+    route: Route,
+    segments: UrlSegment[]): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
+    return this.sesion.obtenerSesion().pipe(
+      map((sesion: Sesion) => {
+        if (sesion.sesionActiva) {
+          return true;
+        } else {
+          this.router.navigate(['login/iniciar-sesion']);
+          return false;
+        }
+      })
+    );
+  }
 }
