@@ -6,7 +6,8 @@ import { MaterialModule } from './material.module';
 import { AppRoutingModule } from './app-routing.module';
 import { CursosModule } from './cursos/cursos.module';
 import { AlumnosModule } from './alumnos/alumnos.module';
-import { HomeModule } from './home/home.module';
+import { CoreModule } from './core/core.module';
+
 
 @NgModule({
   declarations: [
@@ -19,7 +20,7 @@ import { HomeModule } from './home/home.module';
     CursosModule,
     AppRoutingModule,
     AlumnosModule,
-    HomeModule
+    CoreModule
   ],
   providers: [],
   bootstrap: [AppComponent]
