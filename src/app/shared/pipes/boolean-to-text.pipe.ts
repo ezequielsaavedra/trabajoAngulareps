@@ -1,9 +1,9 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
-  name: 'booleanText'
+  name: 'booleanToText'
 })
-export class BooleanTextPipe implements PipeTransform {
+export class BooleanToTextPipe implements PipeTransform {
 
   transform(value: boolean, ...args: any[]): string {
     return value ? args[0] : args[1]
