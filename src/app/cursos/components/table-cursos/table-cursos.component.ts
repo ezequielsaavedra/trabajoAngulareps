@@ -5,7 +5,6 @@ import { Subscription } from 'rxjs';
 import { CursosService } from '../../services/cursos.service';
 import { FormControl, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
-import { EditAlumnosFormComponent } from 'src/app/alumnos/components/edit-alumnos-form/edit-alumnos-form.component';
 import { AgregarCursosFormComponent } from '../agregar-cursos-form/agregar-cursos-form.component';
 import { EditCursosFormComponent } from '../edit-cursos-form/edit-cursos-form.component';
 
@@ -17,7 +16,7 @@ import { EditCursosFormComponent } from '../edit-cursos-form/edit-cursos-form.co
 export class TableCursosComponent {
   suscripcion!: Subscription;
   dataSource!: MatTableDataSource<curso>;
-  columnas: string[] = ["comision", "profesor", "fecha de inicio", "fecha de finalizacion", "inscripcion", "acciones"]
+  columnas: string[] = ["curso", "comision", "profesor", "fecha de inicio", "fecha de finalizacion", "inscripcion", "acciones"]
   formFilter!: FormGroup;
   controles: any = {
     comision: new FormControl("")
@@ -44,7 +43,7 @@ export class TableCursosComponent {
     this.cursosService.filtrarCurso(this.controles.comision.value)
   }
 
-  abrirEditar(curso: curso): void {
+  abrirEditarCurso(curso: curso): void {
     const dialogRef = this.dialog.open(EditCursosFormComponent, {
       height: '500px',
       width: '500px',

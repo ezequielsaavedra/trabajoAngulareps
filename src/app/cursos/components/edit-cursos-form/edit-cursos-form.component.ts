@@ -23,6 +23,7 @@ constructor(
 ){
   this.formCursos = new FormGroup(
     {
+      nombreCurso: new FormControl(data.nombreCurso),
       comision: new FormControl(data.comision),
       nombre: new FormControl(data.profesor.nombre, [Validators.required]),
       apellido: new FormControl(data.profesor.apellido, [Validators.required]),
@@ -43,6 +44,7 @@ getDateFormate(): string{
 
 editarCurso() {
   let curso: curso = {
+    nombreCurso: this.formCursos.value.nombreCurso,
     comision: this.formCursos.value.comision,
     profesor: {
       nombre: this.formCursos.value.nombre,

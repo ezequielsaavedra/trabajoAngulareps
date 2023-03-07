@@ -6,6 +6,7 @@ import { curso } from 'src/app/models/curso';
 export class CursosService {
   cursos: curso[] = [
     {
+      nombreCurso: "inlges inicial",
       profesor: {
         nombre: "agen",
         apellido: "kolar",
@@ -17,6 +18,7 @@ export class CursosService {
       fechaFin: new Date(2023, 10, 22)
     },
     {
+      nombreCurso: "inlges intermedio",
       profesor: {
         nombre: "max",
         apellido: "rebo",
@@ -28,6 +30,7 @@ export class CursosService {
       fechaFin: new Date(2023, 10, 23)
     },
     {
+      nombreCurso: "inlges avanzado",
       profesor: {
         nombre: "siri",
         apellido: "tachi",
@@ -39,6 +42,7 @@ export class CursosService {
       fechaFin: new Date(2023, 10, 22)
     },
     {
+      nombreCurso: "inlges business",
       profesor: {
         nombre: "ben",
         apellido: "quadinaros",

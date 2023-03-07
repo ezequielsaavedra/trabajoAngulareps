@@ -21,6 +21,7 @@ export class AgregarCursosFormComponent {
   ){
     this.formAgregarCurso = new FormGroup(
       {
+        nombreCurso: new FormControl("", [Validators.required]),
         nombre: new FormControl("", [Validators.required]),
         apellido: new FormControl("", [Validators.required]),
         email: new FormControl("", [Validators.required]),
@@ -44,6 +45,7 @@ export class AgregarCursosFormComponent {
 
   agregarCurso(){
     let curso: curso = {
+      nombreCurso: this.formAgregarCurso.value.nombreCurso,
       comision: this.cursoService.numeroComision(),
       profesor: {
         nombre: this.formAgregarCurso.value.nombre,

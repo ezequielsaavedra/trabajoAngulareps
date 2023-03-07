@@ -4,8 +4,6 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material.module';
 import { AppRoutingModule } from './app-routing.module';
-import { CursosModule } from './cursos/cursos.module';
-import { AlumnosModule } from './alumnos/alumnos.module';
 import { CoreModule } from './core/core.module';
 
 
@@ -17,9 +15,7 @@ import { CoreModule } from './core/core.module';
     BrowserModule,
     BrowserAnimationsModule,
     MaterialModule,
-    CursosModule,
     AppRoutingModule,
-    AlumnosModule,
     CoreModule
   ],
   providers: [],
