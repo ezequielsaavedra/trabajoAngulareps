@@ -1,12 +1,14 @@
 import { Component } from '@angular/core';
 import { curso } from 'src/app/models/curso';
 import { MatTableDataSource } from '@angular/material/table';
-import { Subscription } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { CursosService } from '../../services/cursos.service';
 import { FormControl, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { AgregarCursosFormComponent } from '../agregar-cursos-form/agregar-cursos-form.component';
 import { EditCursosFormComponent } from '../edit-cursos-form/edit-cursos-form.component';
+import { Sesion } from 'src/app/models/sesion';
+import { SesionService } from 'src/app/core/services/sesion.service';
 
 @Component({
   selector: 'app-table-cursos',
@@ -15,6 +17,7 @@ import { EditCursosFormComponent } from '../edit-cursos-form/edit-cursos-form.co
 })
 export class TableCursosComponent {
   suscripcion!: Subscription;
+  sesion$!: Observable<Sesion>;
   dataSource!: MatTableDataSource<curso>;
   columnas: string[] = ["curso", "comision", "profesor", "fecha de inicio", "fecha de finalizacion", "inscripcion", "acciones"]
   formFilter!: FormGroup;
@@ -23,12 +26,14 @@ export class TableCursosComponent {
   }
   constructor(
     private cursosService: CursosService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private sesion: SesionService
   ){
     this.formFilter = new FormGroup(this.controles);
   }
 
   ngOnInit(): void {
+    this.sesion$ = this.sesion.obtenerSesion();
     this.dataSource = new MatTableDataSource<curso>();
     this.suscripcion = this.cursosService.obtenerCursos().subscribe((cursos: curso[]) => {
       this.dataSource.data = cursos

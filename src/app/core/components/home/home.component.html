@@ -1,4 +1,4 @@
-<mat-card class="example-card">
+<mat-card class="example-card" *ngIf="sesion$ | async as sesion">
     <mat-card-header class="header-card" >
             <mat-card-title>COMUNIDAD INGLESA</mat-card-title>
             <mat-card-subtitle>Welcome!</mat-card-subtitle>
@@ -13,10 +13,16 @@
         </p>
     </mat-card-content>
     <mat-card-actions>
-        <div class="row">
+        <div class="row" *ngIf="!sesion.sesionActiva">
             <p class="col-6">Iniciar Sesión</p>
-            <button mat-icon-button class="col-6">
+            <button mat-icon-button class="col-6" (click)="login()">
                 <mat-icon>login</mat-icon>
+            </button>
+        </div>
+        <div class="row" *ngIf="sesion.sesionActiva">
+            <p class="col-6">Cerrar Sesión</p>
+            <button mat-icon-button class="col-6" (click)="logout()">
+                <mat-icon>logout</mat-icon>
             </button>
         </div>
     </mat-card-actions>

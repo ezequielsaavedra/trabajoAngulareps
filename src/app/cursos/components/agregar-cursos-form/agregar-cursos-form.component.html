@@ -32,9 +32,8 @@
                 <mat-datepicker-toggle matIconSuffix [for]="fechaFin"></mat-datepicker-toggle>
                 <mat-datepicker #fechaFin></mat-datepicker>
             </mat-form-field>
-            <div class="mt-3 form-check">
-                <input type="checkbox" class="form-check-input" id="checkboxEstado" formControlName="estadoInscripcion">
-                <label class="form-check-label" for="checkboxEstado">Estado</label>
+            <div class="mt-3">
+                <mat-slide-toggle formControlName="estadoInscripcion" color="primary">Estado inscripcion</mat-slide-toggle>
             </div>
         </form>
     </div>

@@ -1,59 +1,73 @@
-<div class="table">
-    <div class="row">
-        <form [formGroup]="formFilter" class="form-filter" (ngSubmit)="filtrarCurso()" class="col-10">
-            <div class="row">
-                <div class="col-auto">
-                    <label for="comision" class="form-label filter-title">Comision Curso</label>
+<ng-container *ngIf="sesion$ | async as sesion">
+    <div class="table">
+        <div class="row">
+            <form [formGroup]="formFilter" class="form-filter" (ngSubmit)="filtrarCurso()" class="col-10">
+                <div class="row">
+                    <div class="col-auto">
+                        <label for="comision" class="form-label filter-title">Comision Curso</label>
+                    </div>
+                    <div class="mb-3" class="col-9">
+                        <input formControlName="comision" type="text" class="form-control" id="comision">
+                    </div>
+                    <div class="col-auto">
+                        <button type="submit" class="btn" mat-raised-button color="primary">Filtrar</button>
+                    </div>
                 </div>
-                <div class="mb-3" class="col-9">
-                    <input formControlName="comision" type="text" class="form-control" id="comision">
-                </div>
-                <div class="col-auto">
-                    <button type="submit" class="btn" mat-raised-button color="primary">Filtrar</button>
-                </div>
+            </form>
+            <div class="col-2" *ngIf="sesion.usuarioActivo?.esAdmin">
+                <button (click)="abrirAgregar()" mat-raised-button color="accent">Agregar Curso</button>
             </div>
-        </form>
-        <div class="col-2">
-            <button (click)="abrirAgregar()" mat-raised-button color="accent">Agregar Curso</button>
         </div>
+        <table mat-table [dataSource]="dataSource">
+            <ng-container matColumnDef="curso">
+                <th mat-header-cell *matHeaderCellDef appTitulos>Curso</th>
+                <td mat-cell *matCellDef="let element">{{ element.nombreCurso | nombres: element.nombreCurso }}</td>
+            </ng-container>
+            <ng-container matColumnDef="comision">
+                <th mat-header-cell *matHeaderCellDef appTitulos>Comision</th>
+                <td mat-cell *matCellDef="let element">{{ element.comision }}</td>
+            </ng-container>
+            <ng-container matColumnDef="profesor">
+                <th mat-header-cell *matHeaderCellDef appTitulos>Profesor</th>
+                <td mat-cell *matCellDef="let element">{{ element | nombres: element.profesor.apellido:
+                    element.profesor.nombre }}</td>
+            </ng-container>
+            <ng-container matColumnDef="fecha de inicio">
+                <th mat-header-cell *matHeaderCellDef appTitulos>Fecha de inicio</th>
+                <td mat-cell *matCellDef="let element"> {{ element.fechaInicio | date: "dd/MM/YYY" }}</td>
+            </ng-container>
+            <ng-container matColumnDef="fecha de finalizacion">
+                <th mat-header-cell *matHeaderCellDef appTitulos>Fecha de finalizacion</th>
+                <td mat-cell *matCellDef="let element"> {{ element.fechaFin | date: "dd/MM/YYY" }}</td>
+            </ng-container>
+            <ng-container matColumnDef="inscripcion">
+                <th mat-header-cell *matHeaderCellDef appTitulos>Inscripcion</th>
+                <td mat-cell *matCellDef="let element"> {{ element.estadoInscripcion | booleanToText: "Abierta" :
+                    "Cerrada" }}</td>
+            </ng-container>
+            <ng-container matColumnDef="acciones" >
+                <th mat-header-cell *matHeaderCellDef appTitulos>Acciones</th>
+                <td mat-cell *matCellDef="let element">
+                    <button mat-icon-button color="primary" (click)="abrirEditarCurso(element)"
+                        *ngIf="sesion.usuarioActivo?.esAdmin">
+                        <mat-icon>edit</mat-icon>
+                    </button>
+                    <button mat-icon-button color="warn" (click)="eliminarCurso(element)"
+                        *ngIf="sesion.usuarioActivo?.esAdmin">
+                        <mat-icon>delete</mat-icon>
+                    </button>
+                    <button mat-button color="primary"
+                        *ngIf="!sesion.usuarioActivo?.esAdmin && element.estadoInscripcion">
+                        Inscribirse
+                    </button>
+                    <button mat-button disabled color="warn"
+                        *ngIf="!sesion.usuarioActivo?.esAdmin && !element.estadoInscripcion">
+                        Sin cupos disponibles
+                    </button>
+                </td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="columnas"></tr>
+            <tr mat-row *matRowDef="let row; columns: columnas"></tr>
+        </table>
     </div>
-    <table mat-table [dataSource]="dataSource">
-        <ng-container matColumnDef="curso">
-            <th mat-header-cell *matHeaderCellDef appTitulos>Curso</th>
-            <td mat-cell *matCellDef="let element">{{ element.nombreCurso }}</td>
-        </ng-container>
-        <ng-container matColumnDef="comision">
-            <th mat-header-cell *matHeaderCellDef appTitulos>Comision</th>
-            <td mat-cell *matCellDef="let element">{{ element.comision }}</td>
-        </ng-container>
-        <ng-container matColumnDef="profesor">
-            <th mat-header-cell *matHeaderCellDef appTitulos>Profesor</th>
-            <td mat-cell *matCellDef="let element">{{ element | nombres: element.profesor.apellido: element.profesor.nombre }}</td>
-        </ng-container>
-        <ng-container matColumnDef="fecha de inicio">
-            <th mat-header-cell *matHeaderCellDef appTitulos>Fecha de inicio</th>
-            <td mat-cell *matCellDef="let element"> {{ element.fechaInicio | date: "dd/MM/YYY" }}</td>
-        </ng-container>
-        <ng-container matColumnDef="fecha de finalizacion">
-            <th mat-header-cell *matHeaderCellDef appTitulos>Fecha de finalizacion</th>
-            <td mat-cell *matCellDef="let element"> {{ element.fechaFin | date: "dd/MM/YYY" }}</td>
-        </ng-container>
-        <ng-container matColumnDef="inscripcion">
-            <th mat-header-cell *matHeaderCellDef appTitulos>Inscripcion</th>
-            <td mat-cell *matCellDef="let element"> {{ element.estadoInscripcion | booleanToText: "Abierta" : "Cerrada" }}</td>
-        </ng-container>
-        <ng-container matColumnDef="acciones">
-            <th mat-header-cell *matHeaderCellDef appTitulos>Acciones</th>
-            <td mat-cell *matCellDef="let element">
-                <button mat-icon-button color="primary" (click)="abrirEditarCurso(element)">
-                    <mat-icon>edit</mat-icon>
-                </button>
-                <button mat-icon-button color="warn" (click)="eliminarCurso(element)">
-                    <mat-icon>delete</mat-icon>
-                </button>
-            </td>
-        </ng-container>
-        <tr mat-header-row *matHeaderRowDef="columnas"></tr>
-        <tr mat-row *matRowDef="let row; columns: columnas"></tr>
-    </table>
-</div>
+</ng-container>

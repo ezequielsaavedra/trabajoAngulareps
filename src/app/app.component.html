@@ -1,23 +1,35 @@
-<mat-toolbar class="example-sidenav-content" color="primary">
-    <div class="example-sidenav-content">
-        <button type="button" mat-button (click)="drawer.toggle()" aria-label="Example icon-button with menu icon">
-            <mat-icon>menu</mat-icon>
-        </button>
-    </div>
-    <button mat-icon-button color="accent" routerLink="inicio"> <mat-icon>home</mat-icon></button>
-    <span>Comunidad Inglesa</span>
-    <span class="example-spacer"></span>
-        <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon" matTooltip="Iniciar Sesion">
+<ng-container *ngIf="sesion$ | async as sesion">
+    <mat-toolbar class="example-sidenav-content" color="primary">
+        <div class="example-sidenav-content">
+            <button type="button" mat-button (click)="drawer.toggle()" aria-label="Example icon-button with menu icon" *ngIf="sesion.sesionActiva">
+                <mat-icon >menu</mat-icon>
+            </button>
+        </div>
+        <button mat-icon-button color="accent" routerLink="inicio"> <mat-icon>home</mat-icon></button>
+        <span>Comunidad Inglesa</span>
+        <span class="example-spacer"></span>
+        <span >
+            <p *ngIf="sesion.usuarioActivo"> 
+                Bienvenido {{ sesion.usuarioActivo.usuario }}
+            </p>
+        </span>
+        <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon"
+            matTooltip="Iniciar Sesion" routerLink="login/iniciar-sesion" *ngIf="!sesion.sesionActiva">
             <mat-icon>login</mat-icon>
         </button>
-</mat-toolbar>
-<mat-drawer-container class="example-container" autosize>
-    <mat-drawer #drawer class="example-sidenav" mode="side" opened="false">
-        <button mat-button color="accent" routerLink="alumnos/listar">Alumnos</button>
-        <br>
-        <button mat-button color="accent" routerLink="cursos/listar">Cursos</button>
-    </mat-drawer>
-    <div align="center">
-        <router-outlet></router-outlet>
-    </div>
-</mat-drawer-container>
+        <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon"
+            matTooltip="Cerrar Sesion" *ngIf="sesion.sesionActiva" (click)="logout()">
+            <mat-icon>logout</mat-icon>
+        </button>
+    </mat-toolbar>
+    <mat-drawer-container class="example-container" autosize >
+        <mat-drawer #drawer class="example-sidenav" mode="side" opened="false">
+            <button mat-button color="accent" routerLink="alumnos/listar">Alumnos</button>
+            <br>
+            <button mat-button color="accent" routerLink="cursos/listar">Cursos</button>
+        </mat-drawer>
+        <div align="center">
+            <router-outlet></router-outlet>
+        </div>
+    </mat-drawer-container>
+</ng-container>

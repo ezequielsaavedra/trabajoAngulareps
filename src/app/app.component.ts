@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
-import { alumno } from './models/alumno';
+import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
+import { SesionService } from './core/services/sesion.service';
+import { Sesion } from './models/sesion';
 
 @Component({
   selector: 'app-root',
@@ -8,26 +11,23 @@ import { alumno } from './models/alumno';
 })
 export class AppComponent {
   title = 'trabajo-angular';
-  alumnos: alumno[] = [
-    { nombre: "Agustin", apellido: "Toponi", email: "atoponi@gmail.com", estado: true, id: 1 },
-    { nombre: "Nicolas", apellido: "Lopez", email: "nlopez@gmail.com", estado: true, id: 2 },
-    { nombre: "Andres", apellido: "Orellana", email: "aorellana@gmail.com", estado: false, id: 3 },
-    { nombre: "Julian", apellido: "Corbera", email: "jcorbera@gmail.com", estado: false, id: 4 }
-  ];
+  sesion$!: Observable<Sesion>;
 
-  agregarAlumno(alumno: alumno){
-    this.alumnos.push(alumno)
+  constructor(
+    private router: Router,
+    private sesion: SesionService
+  ) { }
+
+  ngOnInit(): void {
+    this.sesion$ = this.sesion.obtenerSesion();
   }
 
-  editarAlumno(alum: alumno){
-    this.alumnos = this.alumnos.filter((value) => {
-      if(value.id === alum.id){
-        value.nombre = alum.nombre
-        value.apellido = alum.apellido
-        value.email = alum.email
-        value.estado = alum.estado
-      }
-      return true
-    })
+  logout() {
+    let sesionLogout: Sesion = {
+      sesionActiva: false,
+      usuarioActivo: undefined
+    }
+    this.sesion.logout(sesionLogout);
+    this.router.navigate(['login/iniciar-sesion']);
   }
 }

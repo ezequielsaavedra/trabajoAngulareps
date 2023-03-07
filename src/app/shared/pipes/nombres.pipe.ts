@@ -6,7 +6,11 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class NombresPipe implements PipeTransform {
 
   transform(value: string, ...args: string[]): string {
-    return `${args[0]} ${args[1]}`.toLocaleUpperCase();
+    if (args[1]) {
+      return `${args[0]} ${args[1]}`.toLocaleUpperCase();
+    } else {
+      return  `${args[0]}`.toLocaleUpperCase();
+    }
   }
 
 }

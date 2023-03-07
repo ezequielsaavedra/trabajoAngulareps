@@ -3,10 +3,12 @@ import { alumno } from "src/app/models/alumno";
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
 import { EditAlumnosFormComponent } from '../edit-alumnos-form/edit-alumnos-form.component';
-import { Subscription } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { AlumnosService } from '../../services/alumnos.service';
 import { FormControl, FormGroup } from '@angular/forms';
 import { FormAgregarAlumnosComponent } from '../form-agregar-alumnos/form-agregar-alumnos.component';
+import { SesionService } from 'src/app/core/services/sesion.service';
+import { Sesion } from 'src/app/models/sesion';
 
 @Component({
   selector: 'app-table-alumnos',
@@ -15,6 +17,7 @@ import { FormAgregarAlumnosComponent } from '../form-agregar-alumnos/form-agrega
 })
 export class TableAlumnosComponent {
   suscripcion!: Subscription;
+  sesion$!: Observable<Sesion>;
   dataSource!: MatTableDataSource<alumno>;
   columnas: string[] = ["id", "nombre", "email", "estado", "acciones"];
   formFilter!: FormGroup;
@@ -24,12 +27,14 @@ export class TableAlumnosComponent {
 
   constructor(
     private alumnosService: AlumnosService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private sesion: SesionService
   ) {
     this.formFilter = new FormGroup(this.controles)
   }
 
   ngOnInit(): void {
+    this.sesion$ = this.sesion.obtenerSesion();
     this.dataSource = new MatTableDataSource<alumno>();
     this.suscripcion = this.alumnosService.obtenerAlumnos().subscribe((alumnos: alumno[]) => {
       this.dataSource.data = alumnos

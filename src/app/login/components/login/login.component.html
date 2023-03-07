@@ -1,0 +1,31 @@
+<mat-card class="example-card">
+    <div class="title">
+        <mat-card-title align="center" >Iniciar Sesion</mat-card-title>
+    </div>
+    <mat-card-content>
+        <form [formGroup]="formulario" >
+            <div class="row">
+                <div class="col-md-9" class="mt-4">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Usuario</mat-label>
+                        <input matInput type="text" formControlName="usuario">
+                    </mat-form-field>
+                </div>
+                <div class="col-md-9"  class="mt-4">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Contraseña</mat-label>
+                        <input matInput type="text" formControlName="contrasena">
+                    </mat-form-field>
+                </div>
+                <div class="col-md-9"  class="mt-4">
+                    <mat-slide-toggle formControlName="esAdmin">Es admin</mat-slide-toggle>
+                </div>
+            </div>
+        </form>
+    </mat-card-content>
+    <mat-card-actions>
+        <div class="col" align="end">
+            <button type="submit" mat-raised-button color="primary" (click)="login()">Login</button>
+        </div>
+    </mat-card-actions>
+</mat-card>

@@ -28,7 +28,7 @@ constructor(
       nombre: new FormControl(data.profesor.nombre, [Validators.required]),
       apellido: new FormControl(data.profesor.apellido, [Validators.required]),
       email: new FormControl(data.profesor.email, [Validators.required]),
-      estadoInscipcion: new FormControl(data.estadoInscripcion),
+      estadoInscripcion: new FormControl(data.estadoInscripcion),
       fechaInicio: new FormControl(data.fechaInicio),
       fechaFin: new FormControl(data.fechaFin)
     }
@@ -51,7 +51,7 @@ editarCurso() {
       apellido: this.formCursos.value.apellido,
       email: this.formCursos.value.email
     },
-    estadoInscripcion: this.formCursos.value.estadoInscipcion,
+    estadoInscripcion: this.formCursos.value.estadoInscripcion,
     fechaInicio: this.formCursos.value.fechaInicio,
     fechaFin: this.formCursos.value.fechaFin
   };
