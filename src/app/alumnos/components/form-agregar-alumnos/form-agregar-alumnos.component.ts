@@ -20,7 +20,6 @@ export class FormAgregarAlumnosComponent {
   ) {
     this.formAgregarAlumnos = new FormGroup(
       {
-        id: new FormControl(""),
         nombre: new FormControl("", [Validators.required]),
         apellido: new FormControl("", [Validators.required]),
         email: new FormControl("", [Validators.required, Validators.email]),
@@ -31,14 +30,15 @@ export class FormAgregarAlumnosComponent {
 
   agregarAlumno() {
     let alumno: alumno = {
-      id: this.alumnosService.id++,
+      id: "",
       nombre: this.formAgregarAlumnos.value.nombre.toLocaleLowerCase(),
       apellido: this.formAgregarAlumnos.value.apellido.toLocaleLowerCase(),
       email: this.formAgregarAlumnos.value.email,
       estado: this.formAgregarAlumnos.value.estado
     };
-    this.dialogRef.close();
-    this.alumnosService.agregarAlumno(alumno);
+    this.alumnosService.agregarAlumno(alumno).subscribe((alumno: alumno) => {
+      this.dialogRef.close();
+    })
     }
 
 }

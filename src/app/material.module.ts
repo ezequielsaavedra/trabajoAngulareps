@@ -15,6 +15,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatInputModule } from '@angular/material/input';
 
+
 @NgModule({
   declarations: [],
   imports: [
@@ -32,7 +33,8 @@ import { MatInputModule } from '@angular/material/input';
     MatFormFieldModule,
     MatSlideToggleModule,
     MatNativeDateModule,
-    MatInputModule
+    MatInputModule,
+    
   ], 
   exports: [
     CommonModule,

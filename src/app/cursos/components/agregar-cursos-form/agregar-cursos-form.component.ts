@@ -21,10 +21,9 @@ export class AgregarCursosFormComponent {
   ){
     this.formAgregarCurso = new FormGroup(
       {
+        comision: new FormControl("",[Validators.required]),
         nombreCurso: new FormControl("", [Validators.required]),
-        nombre: new FormControl("", [Validators.required]),
-        apellido: new FormControl("", [Validators.required]),
-        email: new FormControl("", [Validators.required]),
+        profesor: new FormControl("", [Validators.required]),
         estadoInscripcion: new FormControl(),
         fechaInicio: new FormControl("",[Validators.required]),
         fechaFin: new FormControl("",[Validators.required])
@@ -39,24 +38,18 @@ export class AgregarCursosFormComponent {
     return ""
   }
 
-  numeroComision():number{
-     return Math.floor(Math.random() * (10000 - 999) + 999)
-  } 
-
   agregarCurso(){
     let curso: curso = {
+      id: "",
       nombreCurso: this.formAgregarCurso.value.nombreCurso,
-      comision: this.cursoService.numeroComision(),
-      profesor: {
-        nombre: this.formAgregarCurso.value.nombre,
-        apellido: this.formAgregarCurso.value.apellido,
-        email: this.formAgregarCurso.value.email,
-      },
+      comision: this.formAgregarCurso.value.comision,
+      profesor: this.formAgregarCurso.value.profesor,
       estadoInscripcion: this.formAgregarCurso.value.estadoInscripcion,
       fechaInicio: this.formAgregarCurso.value.fechaInicio,
       fechaFin: this.formAgregarCurso.value.fechaFin,
     };
-    this.dialogRef.close();
-    this.cursoService.agregarCurso(curso);
+    this.cursoService.agregarCurso(curso).subscribe((curso: curso) => {
+      this.dialogRef.close();
+    })
   }
 }

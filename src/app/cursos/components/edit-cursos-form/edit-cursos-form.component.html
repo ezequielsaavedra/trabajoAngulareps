@@ -1,23 +1,18 @@
 <div mat-dialog-title>Editar Cursos</div>
 <div mat-dialog-content>
     <form [formGroup]="formCursos" class="row">
-        <div class="mb-3" class="col-6">
-            <label for="inputComision" class="form-label">Comision</label>
-            <input type="number" class="form-control" id="inputComision" aria-describedby="comision"
-                formControlName="comision">
-        </div>
-        <div class="mb-3" class="col-6">
-            <label for="inputNombre" class="form-label">Nombre</label>
-            <input type="text" class="form-control" id="inputNombre" aria-describedby="nombre" formControlName="nombre">
-        </div>
-        <div class="mb-3" class="col-6">
-            <label for="inputApelido" class="form-label">Apellido</label>
-            <input type="text" class="form-control" id="inputApelido" formControlName="apellido">
-        </div>
-        <div class="mb-3" class="col-6">
-            <label for="inputEmail" class="form-label">Email</label>
-            <input type="mail" class="form-control" id="inputEmail" formControlName="email">
-        </div>
+        <mat-form-field class="mb-3" class="col-12" appearance="fill">
+            <mat-label for="inputnombreCurso">Curso</mat-label>
+            <input id="inputnombreCurso" formControlName="nombreCurso" matInput>
+        </mat-form-field>
+        <mat-form-field class="mb-3" class="col-6" appearance="fill">
+            <mat-label for="inputProfesor">Profesor</mat-label>
+            <input id="inputProfesor" formControlName="profesor" matInput placeholder="Nombre-Apellido">
+        </mat-form-field>
+        <mat-form-field class="mb-3" class="col-6" appearance="fill">
+            <mat-label for="inputComision">Comision</mat-label>
+            <input id="inputComision" formControlName="comision" matInput>
+        </mat-form-field>
         <mat-form-field appearance="fill" class="col-6 mt-3">
             <mat-label for="inputFechaInicio">Choose a date</mat-label>
             <input matInput [matDatepicker]="fechaInicio" id="inputFechaInicio" formControlName="fechaInicio">

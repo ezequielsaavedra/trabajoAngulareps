@@ -1,108 +1,41 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, map, Observable, of } from 'rxjs';
 import { curso } from 'src/app/models/curso';
+import { env } from 'src/enviroment/enviroment';
 
 @Injectable()
 export class CursosService {
-  cursos: curso[] = [
-    {
-      nombreCurso: "inlges inicial",
-      profesor: {
-        nombre: "agen",
-        apellido: "kolar",
-        email: "akolar@gmail.com",
-      },
-      comision: 2345,
-      estadoInscripcion: true,
-      fechaInicio: new Date(2023, 2, 6),
-      fechaFin: new Date(2023, 10, 22)
-    },
-    {
-      nombreCurso: "inlges intermedio",
-      profesor: {
-        nombre: "max",
-        apellido: "rebo",
-        email: "mrebo@gmail.com",
-      },
-      comision: 5479,
-      estadoInscripcion: false,
-      fechaInicio: new Date(2023, 2, 7),
-      fechaFin: new Date(2023, 10, 23)
-    },
-    {
-      nombreCurso: "inlges avanzado",
-      profesor: {
-        nombre: "siri",
-        apellido: "tachi",
-        email: "stachi@gmail.com",
-      },
-      comision: 6584,
-      estadoInscripcion: false,
-      fechaInicio: new Date(2023, 2, 6),
-      fechaFin: new Date(2023, 10, 22)
-    },
-    {
-      nombreCurso: "inlges business",
-      profesor: {
-        nombre: "ben",
-        apellido: "quadinaros",
-        email: "bquadinaros@gmail.com",
-      },
-      comision: 3176,
-      estadoInscripcion: true,
-      fechaInicio: new Date(2023, 2, 7),
-      fechaFin: new Date(2023, 10, 23)
-    },
-  ];
-  private cursos$!: BehaviorSubject<curso[]>;
-  private cursosFiltro!: curso[];
 
-  constructor() {
+  constructor(
+    private http: HttpClient
+  ) {
   }
 
   obtenerCursos(): Observable<curso[]> {
-    this.cursos$ = new BehaviorSubject<curso[]>(this.cursos)
-    return this.cursos$.asObservable();
+    return this.http.get<curso[]>(`${env.apiURL}/cursos`)
   }
 
-  agregarCurso(curso: curso) {
-    this.cursos.push(curso);
-    this.cursos$.next(this.cursos);
+  agregarCurso(curso: curso): Observable<curso> {
+    return this.http.post<curso>(`${env.apiURL}/cursos`, curso)
   }
 
-  numeroComision(): number {
-    let numero = Math.floor(Math.random() * (10000 - 999) + 999)
-    if(numero  != this.cursos.findIndex((c: curso) => c.comision === numero)){
-      return numero
-    } else {
-      return this.numeroComision()
-    }
+  eliminarCursos(curso: curso): Observable<curso>{
+    return this.http.delete<curso>(`${env.apiURL}/cursos/${curso.id}`)
   }
 
-  eliminarCursos(curso: curso) {
-    let indice = this.cursos.findIndex((c: curso) => c.comision === curso.comision)
-    if (indice > -1) {
-      this.cursos.splice(indice, 1);
-      this.cursos$.next(this.cursos);
-    }
+  editarCurso(curso: curso): Observable<curso> {
+    return this.http.put<curso>(`${env.apiURL}/cursos/${curso.id}`, curso)
   }
 
-  editarCurso(curso: curso) {
-    let indice = this.cursos.findIndex((c: curso) => c.comision === curso.comision)
-    if (indice > -1) {
-      this.cursos[indice] = curso;
-      this.cursos$.next(this.cursos);
-    }
-  }
-
-  filtrarCurso(form: string): any {
-    of(this.cursos).pipe(
-      map((cursos: curso[]) => {
-        return cursos.filter((cursos: curso) => cursos.comision.toString().includes(form))
-      })
-    ).subscribe((cursos) => {
-      this.cursosFiltro = cursos
-      return this.cursos$.next(this.cursosFiltro)
-    })
-  }
+  // filtrarCurso(form: string): any {
+  //   of(this.cursos).pipe(
+  //     map((cursos: curso[]) => {
+  //       return cursos.filter((cursos: curso) => cursos.nombreCurso.includes(form.toLocaleLowerCase()))
+  //     })
+  //   ).subscribe((cursos) => {
+  //     this.cursosFiltro = cursos
+  //     return this.cursos$.next(this.cursosFiltro)
+  //   })
+  // }
 }

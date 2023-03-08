@@ -12,50 +12,46 @@ import { CursosService } from '../../services/cursos.service';
   styleUrls: ['./edit-cursos-form.component.css'],
 })
 export class EditCursosFormComponent {
-formCursos: FormGroup;
+  formCursos: FormGroup;
 
-constructor(
-  private cursosService: CursosService,
-  private dialogRef: MatDialogRef<EditCursosFormComponent>,
-  @Inject(MAT_DIALOG_DATA) public data: curso,
-  private adapter: DateAdapter<any>,
-  @Inject(MAT_DATE_LOCALE) private locale: string,
-){
-  this.formCursos = new FormGroup(
-    {
-      nombreCurso: new FormControl(data.nombreCurso),
-      comision: new FormControl(data.comision),
-      nombre: new FormControl(data.profesor.nombre, [Validators.required]),
-      apellido: new FormControl(data.profesor.apellido, [Validators.required]),
-      email: new FormControl(data.profesor.email, [Validators.required]),
-      estadoInscripcion: new FormControl(data.estadoInscripcion),
-      fechaInicio: new FormControl(data.fechaInicio),
-      fechaFin: new FormControl(data.fechaFin)
-    }
-  )
-  this.getDateFormate()
-}
+  constructor(
+    private cursosService: CursosService,
+    private dialogRef: MatDialogRef<EditCursosFormComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: curso,
+    private adapter: DateAdapter<any>,
+    @Inject(MAT_DATE_LOCALE) private locale: string,
+  ) {
+    this.formCursos = new FormGroup(
+      {
+        nombreCurso: new FormControl(data.nombreCurso),
+        profesor: new FormControl(data.profesor, [Validators.required]),
+        comision: new FormControl(data.comision),
+        estadoInscripcion: new FormControl(data.estadoInscripcion),
+        fechaInicio: new FormControl(data.fechaInicio),
+        fechaFin: new FormControl(data.fechaFin)
+      }
+    )
+    this.getDateFormate()
+  }
 
-getDateFormate(): string{
-  this.locale = "fr"
-  this.adapter.setLocale(this.locale)
-  return ""
-}
+  getDateFormate(): string {
+    this.locale = "fr"
+    this.adapter.setLocale(this.locale)
+    return ""
+  }
 
-editarCurso() {
-  let curso: curso = {
-    nombreCurso: this.formCursos.value.nombreCurso,
-    comision: this.formCursos.value.comision,
-    profesor: {
-      nombre: this.formCursos.value.nombre,
-      apellido: this.formCursos.value.apellido,
-      email: this.formCursos.value.email
-    },
-    estadoInscripcion: this.formCursos.value.estadoInscripcion,
-    fechaInicio: this.formCursos.value.fechaInicio,
-    fechaFin: this.formCursos.value.fechaFin
-  };
-  this.dialogRef.close();
-  this.cursosService.editarCurso(curso);
-}
+  editarCurso() {
+    let curso: curso = {
+      id: this.data.id,
+      nombreCurso: this.formCursos.value.nombreCurso,
+      profesor: this.formCursos.value.profesor,
+      comision: this.formCursos.value.comision,
+      estadoInscripcion: this.formCursos.value.estadoInscripcion,
+      fechaInicio: this.formCursos.value.fechaInicio,
+      fechaFin: this.formCursos.value.fechaFin
+    };
+    this.cursosService.editarCurso(curso).subscribe((curso: curso) => {
+      this.dialogRef.close();
+    })
+  }
 }

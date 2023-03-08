@@ -1,8 +1,7 @@
-import { profesor } from "./profesor";
-
 export interface curso {
+    id: string,
     nombreCurso: string,
-    profesor: profesor;
+    profesor: string;
     comision: number;
     estadoInscripcion: boolean;
     fechaInicio: Date;

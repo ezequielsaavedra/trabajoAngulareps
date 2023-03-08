@@ -19,7 +19,6 @@ export class EditAlumnosFormComponent {
   ) {
     this.formAlumnos = new FormGroup(
       {
-        id: new FormControl(data.id),
         nombre: new FormControl(data.nombre, [Validators.required]),
         apellido: new FormControl(data.apellido, [Validators.required]),
         email: new FormControl(data.email, [Validators.required, Validators.email]),
@@ -30,14 +29,15 @@ export class EditAlumnosFormComponent {
 
   editarAlumno() {
     let alumno: alumno = {
-      id: this.formAlumnos.value.id,
+      id: this.data.id,
       nombre: this.formAlumnos.value.nombre.toLocaleLowerCase(),
       apellido: this.formAlumnos.value.apellido.toLocaleLowerCase(),
       email: this.formAlumnos.value.email,
       estado: this.formAlumnos.value.estado
     };
-    this.dialogRef.close();
-    this.alumnosService.editarAlumno(alumno);
+    this.alumnosService.editarAlumno(alumno).subscribe((alumno: alumno) => {
+      this.dialogRef.close();
+    })
   }
 
 }

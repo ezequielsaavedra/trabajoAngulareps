@@ -22,7 +22,7 @@ export class TableCursosComponent {
   columnas: string[] = ["curso", "comision", "profesor", "fecha de inicio", "fecha de finalizacion", "inscripcion", "acciones"]
   formFilter!: FormGroup;
   controles: any = {
-    comision: new FormControl("")
+    nombre: new FormControl("")
   }
   constructor(
     private cursosService: CursosService,
@@ -41,25 +41,43 @@ export class TableCursosComponent {
   }
 
   eliminarCurso(curso: curso) {
-    this.cursosService.eliminarCursos(curso)
+    this.cursosService.eliminarCursos(curso).subscribe((curso: curso) => {
+      this.suscripcion = this.cursosService.obtenerCursos().subscribe((cursos: curso[]) => {
+        this.dataSource.data = cursos
+      })
+    })
   }
 
-  filtrarCurso() {
-    this.cursosService.filtrarCurso(this.controles.comision.value)
-  }
+  // filtrarCurso() {
+  //   this.cursosService.filtrarCurso(this.controles.nombre.value).subscribe((curso: curso) => {
+  //     this.suscripcion = this.cursosService.obtenerCursos().subscribe((cursos: curso[]) => {
+  //       this.dataSource.data = cursos
+  //     })
+  //   })
+  // }
 
   abrirEditarCurso(curso: curso): void {
-    const dialogRef = this.dialog.open(EditCursosFormComponent, {
+    let dialogRef = this.dialog.open(EditCursosFormComponent, {
       height: '500px',
       width: '500px',
       data: curso
     })
+    dialogRef.afterClosed().subscribe(cursos => {
+      this.suscripcion = this.cursosService.obtenerCursos().subscribe((cursos: curso[]) => {
+        this.dataSource.data = cursos
+      })
+    })
   }
 
   abrirAgregar(): void {
-    const dialogRef = this.dialog.open(AgregarCursosFormComponent, {
+    let dialogRef = this.dialog.open(AgregarCursosFormComponent, {
       height: '450px',
       width: '400px'
+    })
+    dialogRef.afterClosed().subscribe(cursos => {
+      this.suscripcion = this.cursosService.obtenerCursos().subscribe((cursos: curso[]) => {
+        this.dataSource.data = cursos
+      })
     })
   }
 }

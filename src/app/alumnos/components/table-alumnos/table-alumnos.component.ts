@@ -1,4 +1,4 @@
-import { Component} from '@angular/core';
+import { Component } from '@angular/core';
 import { alumno } from "src/app/models/alumno";
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
@@ -42,26 +42,40 @@ export class TableAlumnosComponent {
   }
 
   eliminarAlumno(alumno: alumno) {
-    this.alumnosService.eliminarAlumnos(alumno)
+    this.alumnosService.eliminarAlumnos(alumno).subscribe((alumno: alumno) => {
+      this.suscripcion = this.alumnosService.obtenerAlumnos().subscribe((alumnos: alumno[]) => {
+        this.dataSource.data = alumnos
+      })
+    })
   }
 
-  filtrarAlumno() {
-    this.alumnosService.filtrarAlumno(this.controles.nombre.value)
-  }
+  // filtrarAlumno() {
+  //   this.alumnosService.filtrarAlumno(this.controles.nombre.value)
+  // }
 
   abrirEditar(alumno: alumno): void {
-    const dialogRef = this.dialog.open(EditAlumnosFormComponent, {
+    let dialogRef = this.dialog.open(EditAlumnosFormComponent, {
       height: '500px',
       width: '400px',
       data: alumno
     });
+    dialogRef.afterClosed().subscribe(alumno => {
+      this.suscripcion = this.alumnosService.obtenerAlumnos().subscribe((alumnos: alumno[]) => {
+        this.dataSource.data = alumnos
+      })
+    })
   }
 
   abrirAgregar(): void {
-    const dialogRef = this.dialog.open(FormAgregarAlumnosComponent, {
+    let dialogRef = this.dialog.open(FormAgregarAlumnosComponent, {
       height: '500px',
       width: '400px',
     });
+    dialogRef.afterClosed().subscribe(alumno => {
+      this.suscripcion = this.alumnosService.obtenerAlumnos().subscribe((alumnos: alumno[]) => {
+        this.dataSource.data = alumnos
+      })
+    })
   }
 }
 
