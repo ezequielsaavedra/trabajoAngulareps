@@ -1,14 +1,23 @@
+import { HttpClient, HttpHandler } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { AlumnosService } from '../../services/alumnos.service';
 
 import { EditAlumnosFormComponent } from './edit-alumnos-form.component';
 
 describe('EditAlumnosFormComponent', () => {
   let component: EditAlumnosFormComponent;
   let fixture: ComponentFixture<EditAlumnosFormComponent>;
+  const dialogRefData = {
+    close: jasmine.createSpy('close')
+  }
+
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ EditAlumnosFormComponent ]
+      declarations: [ EditAlumnosFormComponent ],
+      imports: [],
+      providers: [AlumnosService, HttpClient, HttpHandler, MatDialog, { provide: MatDialogRef, useValue: dialogRefData}, { provide: MAT_DIALOG_DATA, useValue: {} }]
     })
     .compileComponents();
 
