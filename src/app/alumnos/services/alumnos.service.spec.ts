@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
 
@@ -17,4 +18,8 @@ describe('AlumnosServiceService', () => {
   it('should be created', () => {
     expect(service).toBeTruthy();
   });
+
+  // it("retorna datos del api", () => {
+  //   datos: HttpClient
+  // })
 });

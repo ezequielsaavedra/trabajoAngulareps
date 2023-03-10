@@ -1,6 +1,7 @@
 import { HttpClient, HttpHandler } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { SharedModule } from 'src/app/shared/shared.module';
 import { AlumnosService } from '../../services/alumnos.service';
 
 import { EditAlumnosFormComponent } from './edit-alumnos-form.component';
@@ -16,7 +17,7 @@ describe('EditAlumnosFormComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ EditAlumnosFormComponent ],
-      imports: [],
+      imports: [SharedModule],
       providers: [AlumnosService, HttpClient, HttpHandler, MatDialog, { provide: MatDialogRef, useValue: dialogRefData}, { provide: MAT_DIALOG_DATA, useValue: {} }]
     })
     .compileComponents();

@@ -7,12 +7,13 @@ import { Sesion } from 'src/app/models/sesion';
 })
 export class SesionService {
   sesion$!: BehaviorSubject<Sesion>
+  sesion!: Sesion
 
   constructor() { 
-    let sesion: Sesion = {
+    this.sesion = {
       sesionActiva: false
     };
-    this.sesion$ = new BehaviorSubject<Sesion>(sesion);
+    this.sesion$ = new BehaviorSubject<Sesion>(this.sesion);
   }
 
   crearSesion(sesion: Sesion){
