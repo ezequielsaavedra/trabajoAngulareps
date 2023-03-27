@@ -1,5 +1,10 @@
 <ng-container *ngIf="sesion$ | async as sesion">
-    <div class="table">
+    <div class="row display-flex spinner" *ngIf="cargando$ | async">
+        <div class="col align-self-center">
+            <mat-spinner></mat-spinner>
+        </div>
+    </div>
+    <div class="table"  *ngIf="!(cargando$ | async)">
         <div class="row">
             <form [formGroup]="formFilter" class="form-filter"  class="col-10">
                 <div class="row">

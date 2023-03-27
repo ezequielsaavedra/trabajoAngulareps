@@ -9,6 +9,10 @@ import { AgregarCursosFormComponent } from '../agregar-cursos-form/agregar-curso
 import { EditCursosFormComponent } from '../edit-cursos-form/edit-cursos-form.component';
 import { Sesion } from 'src/app/models/sesion';
 import { SesionService } from 'src/app/core/services/sesion.service';
+import { Store } from '@ngrx/store';
+import { AppState } from 'src/app/core/state/app.state';
+import { cargarCursos, cursosCargados } from 'src/app/core/state/cursos.actions';
+import { cargandoCursosSelector, cursosCargadoSelector } from 'src/app/core/state/cursos.selectors';
 
 @Component({
   selector: 'app-table-cursos',
@@ -21,23 +25,31 @@ export class TableCursosComponent {
   dataSource!: MatTableDataSource<curso>;
   columnas: string[] = ["curso", "comision", "profesor", "fecha de inicio", "fecha de finalizacion", "inscripcion", "acciones"]
   formFilter!: FormGroup;
+  cargando$!: Observable<boolean>
   controles: any = {
     nombre: new FormControl("")
   }
+
   constructor(
     private cursosService: CursosService,
     private dialog: MatDialog,
-    private sesion: SesionService
+    private sesion: SesionService,
+    private store: Store<AppState>
   ){
     this.formFilter = new FormGroup(this.controles);
   }
 
   ngOnInit(): void {
+    this.cargando$ = this.store.select(cargandoCursosSelector);
+    this.store.dispatch(cargarCursos());
     this.sesion$ = this.sesion.obtenerSesion();
     this.dataSource = new MatTableDataSource<curso>();
-    this.suscripcion = this.cursosService.obtenerCursos().subscribe((cursos: curso[]) => {
+    this.cursosService.obtenerCursos().subscribe((cursos: curso[]) => {
+      this.store.dispatch(cursosCargados({ cursos: cursos}))
+    });
+    this.suscripcion = this.store.select(cursosCargadoSelector).subscribe((cursos: curso[]) => {
       this.dataSource.data = cursos
-    })
+    });
   }
 
   eliminarCurso(curso: curso) {

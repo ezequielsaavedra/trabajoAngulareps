@@ -14,7 +14,7 @@ import { MatFormFieldModule} from '@angular/material/form-field';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatInputModule } from '@angular/material/input';
-
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [],
@@ -34,7 +34,7 @@ import { MatInputModule } from '@angular/material/input';
     MatSlideToggleModule,
     MatNativeDateModule,
     MatInputModule,
-    
+    MatProgressSpinnerModule
   ], 
   exports: [
     CommonModule,
@@ -51,7 +51,8 @@ import { MatInputModule } from '@angular/material/input';
     MatFormFieldModule,
     MatSlideToggleModule,
     MatNativeDateModule,
-    MatInputModule
+    MatInputModule,
+    MatProgressSpinnerModule
   ]
 })
 export class MaterialModule { }
