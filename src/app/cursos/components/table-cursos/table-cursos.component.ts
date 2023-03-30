@@ -10,9 +10,10 @@ import { EditCursosFormComponent } from '../edit-cursos-form/edit-cursos-form.co
 import { Sesion } from 'src/app/models/sesion';
 import { SesionService } from 'src/app/core/services/sesion.service';
 import { Store } from '@ngrx/store';
-import { AppState } from 'src/app/core/state/app.state';
-import { cargarCursos, cursosCargados } from 'src/app/core/state/cursos.actions';
-import { cargandoCursosSelector, cursosCargadoSelector } from 'src/app/core/state/cursos.selectors';
+import { selectCargandoCursos, selectCursosCargados } from '../../state/curso-state.selectors';
+import { cursosCargados, eliminarCurso, loadCursoStates } from '../../state/curso-state.actions';
+import { CursoState } from '../../state/curso-state.reducer';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-table-cursos',
@@ -34,39 +35,28 @@ export class TableCursosComponent {
     private cursosService: CursosService,
     private dialog: MatDialog,
     private sesion: SesionService,
-    private store: Store<AppState>
+    private store: Store<CursoState>,
+    private snackBar: MatSnackBar
   ){
     this.formFilter = new FormGroup(this.controles);
   }
 
   ngOnInit(): void {
-    this.cargando$ = this.store.select(cargandoCursosSelector);
-    this.store.dispatch(cargarCursos());
+    this.cargando$ = this.store.select(selectCargandoCursos);
+    this.store.dispatch(loadCursoStates());
     this.sesion$ = this.sesion.obtenerSesion();
     this.dataSource = new MatTableDataSource<curso>();
-    this.cursosService.obtenerCursos().subscribe((cursos: curso[]) => {
-      this.store.dispatch(cursosCargados({ cursos: cursos}))
-    });
-    this.suscripcion = this.store.select(cursosCargadoSelector).subscribe((cursos: curso[]) => {
+  
+
+    this.suscripcion = this.store.select(selectCursosCargados).subscribe((cursos: curso[]) => {
       this.dataSource.data = cursos
     });
   }
 
   eliminarCurso(curso: curso) {
-    this.cursosService.eliminarCursos(curso).subscribe((curso: curso) => {
-      this.suscripcion = this.cursosService.obtenerCursos().subscribe((cursos: curso[]) => {
-        this.dataSource.data = cursos
-      })
-    })
+    this.snackBar.open(`${curso.nombreCurso} eliminado satisfactoriamente`);
+    this.store.dispatch(eliminarCurso({ curso }));
   }
-
-  // filtrarCurso() {
-  //   this.cursosService.filtrarCurso(this.controles.nombre.value).subscribe((curso: curso) => {
-  //     this.suscripcion = this.cursosService.obtenerCursos().subscribe((cursos: curso[]) => {
-  //       this.dataSource.data = cursos
-  //     })
-  //   })
-  // }
 
   abrirEditarCurso(curso: curso): void {
     let dialogRef = this.dialog.open(EditCursosFormComponent, {
@@ -75,7 +65,8 @@ export class TableCursosComponent {
       data: curso
     })
     dialogRef.afterClosed().subscribe(cursos => {
-      this.suscripcion = this.cursosService.obtenerCursos().subscribe((cursos: curso[]) => {
+      this.snackBar.open(`${curso.nombreCurso} editado satisfactoriamente`)
+      this.suscripcion = this.store.select(selectCursosCargados).subscribe((cursos: curso[]) => {
         this.dataSource.data = cursos
       })
     })
@@ -86,8 +77,8 @@ export class TableCursosComponent {
       height: '450px',
       width: '400px'
     })
-    dialogRef.afterClosed().subscribe(cursos => {
-      this.suscripcion = this.cursosService.obtenerCursos().subscribe((cursos: curso[]) => {
+    dialogRef.afterClosed().subscribe(curso => {
+      this.suscripcion = this.store.select(selectCursosCargados).subscribe((cursos: curso[]) => {
         this.dataSource.data = cursos
       })
     })

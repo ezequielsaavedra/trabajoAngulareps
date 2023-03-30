@@ -49,10 +49,6 @@ export class TableAlumnosComponent {
     })
   }
 
-  // filtrarAlumno() {
-  //   this.alumnosService.filtrarAlumno(this.controles.nombre.value)
-  // }
-
   abrirEditar(alumno: alumno): void {
     let dialogRef = this.dialog.open(EditAlumnosFormComponent, {
       height: '500px',

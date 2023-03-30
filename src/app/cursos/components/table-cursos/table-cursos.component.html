@@ -5,24 +5,6 @@
         </div>
     </div>
     <div class="table"  *ngIf="!(cargando$ | async)">
-        <div class="row">
-            <form [formGroup]="formFilter" class="form-filter"  class="col-10">
-                <div class="row">
-                    <div class="col-auto">
-                        <label for="nombre" class="form-label filter-title">Nombre Curso</label>
-                    </div>
-                    <div class="mb-3" class="col-9">
-                        <input formControlName="nombre" type="text" class="form-control" id="nombre">
-                    </div>
-                    <div class="col-auto">
-                        <button type="submit" class="btn" mat-raised-button color="primary">Filtrar</button>
-                    </div>
-                </div>
-            </form>
-            <div class="col-2" *ngIf="sesion.usuarioActivo?.esAdmin">
-                <button (click)="abrirAgregar()" mat-raised-button color="accent">Agregar Curso</button>
-            </div>
-        </div>
         <table mat-table [dataSource]="dataSource">
             <ng-container matColumnDef="curso">
                 <th mat-header-cell *matHeaderCellDef >Curso</th>

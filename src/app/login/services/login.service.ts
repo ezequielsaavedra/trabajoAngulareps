@@ -18,6 +18,5 @@ export class LoginService {
       usuarioActivo: usuario
     };
     this.sesion.crearSesion(sesion);
-    console.log(sesion)
   }
 }

@@ -7,6 +7,10 @@ import { EditCursosFormComponent } from './components/edit-cursos-form/edit-curs
 import { AgregarCursosFormComponent } from './components/agregar-cursos-form/agregar-cursos-form.component';
 import { MAT_DATE_LOCALE } from '@angular/material/core';
 import { SharedModule } from '../shared/shared.module';
+import { StoreModule } from '@ngrx/store';
+import { cursoStateFeatureKey, reducer } from './state/curso-state.reducer';
+import { EffectsModule } from '@ngrx/effects';
+import { CursosEffects } from './state/curso-state.effects';
 
 @NgModule({
   declarations: [
@@ -17,7 +21,9 @@ import { SharedModule } from '../shared/shared.module';
   imports: [
     CommonModule,
     CursosRoutingModule,
-    SharedModule
+    SharedModule,
+    StoreModule.forFeature(cursoStateFeatureKey, reducer),
+    EffectsModule.forFeature([CursosEffects])
   ],
   providers: [
     CursosService,

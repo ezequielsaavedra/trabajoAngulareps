@@ -6,7 +6,7 @@ import { MaterialModule } from './material.module';
 import { AppRoutingModule } from './app-routing.module';
 import { CoreModule } from './core/core.module';
 import { StoreModule } from '@ngrx/store';
-import { ROOT_REDUCERS } from './core/state/app.state';
+import { EffectsModule } from '@ngrx/effects';
 
 @NgModule({
   declarations: [
@@ -18,7 +18,8 @@ import { ROOT_REDUCERS } from './core/state/app.state';
     MaterialModule,
     AppRoutingModule,
     CoreModule,
-    StoreModule.forRoot(ROOT_REDUCERS)
+    StoreModule.forRoot({}, {}),
+    EffectsModule.forRoot([])
   ],
   providers: [],
   bootstrap: [AppComponent]

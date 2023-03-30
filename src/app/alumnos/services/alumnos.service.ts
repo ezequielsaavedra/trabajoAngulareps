@@ -29,15 +29,4 @@ export class AlumnosService {
   editarAlumno(alumno: alumno): Observable<alumno> {
     return this.http.put<alumno>(`${env.apiURL}/alumno/${alumno.id}`, alumno)
   }
-
-  // filtrarAlumno(form: string): any {
-  //   of(this.alumnos).pipe(
-  //     map((alumnos: alumno[]) => {
-  //       return alumnos.filter((alumnos: alumno) => alumnos.nombre.includes(form.toLocaleLowerCase()) || alumnos.apellido.includes(form.toLocaleLowerCase())) 
-  //     })
-  //   ).subscribe((alumnos) => {
-  //     this.alumnosFiltro = alumnos
-  //     return this.alumnos$.next(this.alumnosFiltro)
-  //   })
-  // }
 }

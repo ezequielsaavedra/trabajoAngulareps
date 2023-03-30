@@ -27,15 +27,4 @@ export class CursosService {
   editarCurso(curso: curso): Observable<curso> {
     return this.http.put<curso>(`${env.apiURL}/cursos/${curso.id}`, curso)
   }
-
-  // filtrarCurso(form: string): any {
-  //   of(this.cursos).pipe(
-  //     map((cursos: curso[]) => {
-  //       return cursos.filter((cursos: curso) => cursos.nombreCurso.includes(form.toLocaleLowerCase()))
-  //     })
-  //   ).subscribe((cursos) => {
-  //     this.cursosFiltro = cursos
-  //     return this.cursos$.next(this.cursosFiltro)
-  //   })
-  // }
 }

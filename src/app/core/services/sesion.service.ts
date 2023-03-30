@@ -26,6 +26,5 @@ export class SesionService {
 
   logout(sesion: Sesion){
     this.sesion$.next(sesion);
-    console.log(sesion)
   }
 }

@@ -2,8 +2,11 @@ import { Component, Inject } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { DateAdapter, MAT_DATE_LOCALE } from '@angular/material/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Store } from '@ngrx/store';
 import { curso } from 'src/app/models/curso';
 import { CursosService } from '../../services/cursos.service';
+import { editarCurso } from '../../state/curso-state.actions';
+import { CursoState } from '../../state/curso-state.reducer';
 
 
 @Component({
@@ -20,6 +23,7 @@ export class EditCursosFormComponent {
     @Inject(MAT_DIALOG_DATA) public data: curso,
     private adapter: DateAdapter<any>,
     @Inject(MAT_DATE_LOCALE) private locale: string,
+    private store: Store<CursoState>,
   ) {
     this.formCursos = new FormGroup(
       {
@@ -50,8 +54,7 @@ export class EditCursosFormComponent {
       fechaInicio: this.formCursos.value.fechaInicio,
       fechaFin: this.formCursos.value.fechaFin
     };
-    this.cursosService.editarCurso(curso).subscribe((curso: curso) => {
-      this.dialogRef.close();
-    })
+    this.store.dispatch(editarCurso({curso: curso}));
+    this.dialogRef.close();
   }
 }
