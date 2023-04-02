@@ -6,7 +6,10 @@ import { TableAlumnosComponent } from './components/table-alumnos/table-alumnos.
 import { AlumnosRoutingModule } from './alumnos-routing.module';
 import { AlumnosService } from './services/alumnos.service';
 import { SharedModule } from '../shared/shared.module';
-
+import { EffectsModule } from '@ngrx/effects';
+import { AlumnosStateEffects } from './state/alumnos-state.effects';
+import { StoreModule } from '@ngrx/store';
+import { alumnosStateFeatureKey, reducer } from './state/alumnos-state.reducer';
 
 
 @NgModule({
@@ -18,7 +21,9 @@ import { SharedModule } from '../shared/shared.module';
   imports: [
     CommonModule,
     AlumnosRoutingModule,
-    SharedModule
+    SharedModule,
+    StoreModule.forFeature(alumnosStateFeatureKey, reducer),
+    EffectsModule.forFeature([AlumnosStateEffects])
   ], 
   providers: [
     AlumnosService

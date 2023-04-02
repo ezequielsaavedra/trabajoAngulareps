@@ -56,5 +56,6 @@
             <tr mat-header-row *matHeaderRowDef="columnas"></tr>
             <tr mat-row *matRowDef="let row; columns: columnas"></tr>
         </table>
+        <button mat-raised-button color="primary" (click)="abrirAgregar()"  *ngIf="sesion.usuarioActivo?.esAdmin">Agregar Curso</button>
     </div>
 </ng-container>

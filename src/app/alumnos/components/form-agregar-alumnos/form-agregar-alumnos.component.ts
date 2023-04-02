@@ -2,7 +2,9 @@ import { Component, } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { alumno } from 'src/app/models/alumno';
-import { AlumnosService } from '../../services/alumnos.service';
+import { AlumnoState } from 'src/app/models/alumnos.state';
+import { Store } from '@ngrx/store';
+import { agregarAlumno } from '../../state/alumnos-state.actions';
 
 
 @Component({
@@ -15,8 +17,8 @@ export class FormAgregarAlumnosComponent {
   formAgregarAlumnos: FormGroup
 
   constructor(
-    private alumnosService: AlumnosService,
-    private dialogRef: MatDialogRef<FormAgregarAlumnosComponent>
+    private dialogRef: MatDialogRef<FormAgregarAlumnosComponent>,
+    private store : Store<AlumnoState>
   ) {
     this.formAgregarAlumnos = new FormGroup(
       {
@@ -36,9 +38,8 @@ export class FormAgregarAlumnosComponent {
       email: this.formAgregarAlumnos.value.email,
       estado: this.formAgregarAlumnos.value.estado
     };
-    this.alumnosService.agregarAlumno(alumno).subscribe((alumno: alumno) => {
+    this.store.dispatch(agregarAlumno({ alumno: alumno }));
       this.dialogRef.close();
-    })
     }
 
 }

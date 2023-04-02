@@ -1,6 +1,11 @@
 <ng-container *ngIf="sesion$ | async as sesion">
-    <div class="table">
-        <table mat-table [dataSource]="dataSource" #table>
+    <div class="row display-flex spinner" *ngIf="cargando$ | async">
+        <div class="col align-self-center">
+            <mat-spinner></mat-spinner>
+        </div>
+    </div>
+    <div class="table" *ngIf="!(cargando$ | async)">
+        <table mat-table [dataSource]="dataSource">
             <ng-container matColumnDef="id">
                 <th mat-header-cell *matHeaderCellDef>ID</th>
                 <td mat-cell *matCellDef="let element">{{ element.id }}</td>
@@ -39,5 +44,6 @@
             <tr mat-header-row *matHeaderRowDef="columnas"></tr>
             <tr mat-row *matRowDef="let row; columns: columnas"></tr>
         </table>
+        <button mat-raised-button color="primary" (click)="abrirAgregar()"  *ngIf="sesion.usuarioActivo?.esAdmin">Agregar Alumnos</button>
     </div>
 </ng-container>

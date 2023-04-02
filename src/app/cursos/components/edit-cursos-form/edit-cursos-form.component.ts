@@ -4,7 +4,6 @@ import { DateAdapter, MAT_DATE_LOCALE } from '@angular/material/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
 import { curso } from 'src/app/models/curso';
-import { CursosService } from '../../services/cursos.service';
 import { editarCurso } from '../../state/curso-state.actions';
 import { CursoState } from '../../state/curso-state.reducer';
 
@@ -18,7 +17,6 @@ export class EditCursosFormComponent {
   formCursos: FormGroup;
 
   constructor(
-    private cursosService: CursosService,
     private dialogRef: MatDialogRef<EditCursosFormComponent>,
     @Inject(MAT_DIALOG_DATA) public data: curso,
     private adapter: DateAdapter<any>,

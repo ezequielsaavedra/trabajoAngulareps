@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { curso } from 'src/app/models/curso';
 import { MatTableDataSource } from '@angular/material/table';
 import { Observable, Subscription } from 'rxjs';
-import { CursosService } from '../../services/cursos.service';
 import { FormControl, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { AgregarCursosFormComponent } from '../agregar-cursos-form/agregar-cursos-form.component';
@@ -11,7 +10,7 @@ import { Sesion } from 'src/app/models/sesion';
 import { SesionService } from 'src/app/core/services/sesion.service';
 import { Store } from '@ngrx/store';
 import { selectCargandoCursos, selectCursosCargados } from '../../state/curso-state.selectors';
-import { cursosCargados, eliminarCurso, loadCursoStates } from '../../state/curso-state.actions';
+import { eliminarCurso, loadCursoStates } from '../../state/curso-state.actions';
 import { CursoState } from '../../state/curso-state.reducer';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
@@ -32,7 +31,6 @@ export class TableCursosComponent {
   }
 
   constructor(
-    private cursosService: CursosService,
     private dialog: MatDialog,
     private sesion: SesionService,
     private store: Store<CursoState>,
@@ -46,8 +44,6 @@ export class TableCursosComponent {
     this.store.dispatch(loadCursoStates());
     this.sesion$ = this.sesion.obtenerSesion();
     this.dataSource = new MatTableDataSource<curso>();
-  
-
     this.suscripcion = this.store.select(selectCursosCargados).subscribe((cursos: curso[]) => {
       this.dataSource.data = cursos
     });

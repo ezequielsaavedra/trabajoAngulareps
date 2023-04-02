@@ -4,7 +4,6 @@ import { DateAdapter, MAT_DATE_LOCALE } from '@angular/material/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
 import { curso } from 'src/app/models/curso';
-import { CursosService } from '../../services/cursos.service';
 import { agregarCurso } from '../../state/curso-state.actions';
 import { CursoState } from '../../state/curso-state.reducer';
 
@@ -17,7 +16,6 @@ export class AgregarCursosFormComponent {
   formAgregarCurso: FormGroup
 
   constructor(
-    private cursoService: CursosService,
     private dialogRef: MatDialogRef<AgregarCursosFormComponent>,
     private adapter: DateAdapter<any>,
     private store: Store<CursoState>,

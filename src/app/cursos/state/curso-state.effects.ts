@@ -21,6 +21,7 @@ export class CursosEffects {
             })
         )
     }) ;
+    
     agregarCurso$ = createEffect(() => {
         return this.action$.pipe(
             ofType(agregarCurso),
@@ -34,6 +35,7 @@ export class CursosEffects {
             })
         );
     });
+    
     elimninarCurso$ = createEffect(() => {
         return this.action$.pipe(
             ofType(eliminarCurso),
@@ -65,6 +67,5 @@ export class CursosEffects {
         private action$: Actions,
         private snackBar: MatSnackBar
     ) {
-
     }
 }
